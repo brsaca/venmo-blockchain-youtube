@@ -23,10 +23,10 @@ contract Transactions {
     // Function to add a transaction to the blockchain with our struct
     function addToBlockchain(address payable receiver, uint amount, string memory message) public {
         transactionCount += 1;
-        transactions.push(Transaction(message.sender, receiver, amount, message, block.timestamp));
+        transactions.push(Transaction(msg.sender, receiver, amount, message, block.timestamp));
 
         // Emit the event we created earlier
-        emit Transfer(message.sender, receiver, amount, message, block.timestamp);
+        emit Transfer(msg.sender, receiver, amount, message, block.timestamp);
     }
 
     // Fucntion to get all the transactions
