@@ -1,7 +1,12 @@
 import styles from '../styles/Navbar.module.css'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import { TransactionContext  } from '../context/context'
+import { useContext  } from 'react'
+import { shortenAddress } from '../utils/shortenAddress'
 
 const Navbar = () => {
+  const { currentAccount , connectWallet } = useContext(TransactionContext)
+
   return <nav className={styles.navigationContainer}>
     <div className={styles.container}>
       <div className={styles.logoContainer}>
@@ -10,18 +15,23 @@ const Navbar = () => {
           alt='Venmo logo' 
           className={styles.logoImage}/>
       </div>
-      <div className={styles.actionsContainer}>
-        <p>
-          Hello, <span className={styles.accentColor}>UserAddress!</span> 👋
-        </p>
-        <ChevronDownIcon className={styles.arrowDownIcon} />
-        <div className={styles.avatarContainer}>
-          <img
-            className={styles.avatarImage}
-            src='https://i.pravatar.cc/40'
-            alt='' />
+      {currentAccount ? (
+        <div className={styles.actionsContainer}>
+          <p>
+            Hello, <span className={styles.accentColor}>{shortenAddress(currentAccount)}!</span> 👋
+          </p>
+          <ChevronDownIcon className={styles.arrowDownIcon} />
+          <div className={styles.avatarContainer}>
+            <img
+              className={styles.avatarImage}
+              src='https://i.pravatar.cc/40'
+              alt='' />
+          </div>
         </div>
-      </div>
+      ):(
+        <button className={styles.connectBtn} onClick={connectWallet}>Connect Wallet</button>
+      )}
+      
     </div>
   </nav>
 }
