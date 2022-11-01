@@ -3,9 +3,9 @@
 Based on youtube tutorial [Build Venmo Web3 Clone with Next.js & Solidity](https://www.youtube.com/watch?v=rQadaQXSO08)
 
 <p align="center">
-<!--<a href="https://discord-clone-blockchain-28mokabmn-brenfondeadora.vercel.app/">
-<img src="images/discord.png" align="center" width="80%"> 
-</a>  -->
+<a href="https://venmo-youtube-clone.netlify.app/">
+<img src="images/venmo.png" align="center" width="80%"> 
+</a>  
 <br><br>
      Venmo
     <br><br>
@@ -13,7 +13,7 @@ Based on youtube tutorial [Build Venmo Web3 Clone with Next.js & Solidity](https
     <img alt="version" src="https://img.shields.io/badge/Version-v1.0-red.svg" />
   </a>
   <a href="#">
-    <img alt="environment" src="https://img.shields.io/badge/Environment-localhost-green.svg" />
+    <img alt="environment" src="https://img.shields.io/badge/Environment-netlify-green.svg" />
   </a>
   <a href="#">
     <img alt="License" src="https://img.shields.io/badge/License-MIT-orange.svg" />
