@@ -66,24 +66,6 @@ export const TransactionProvider = ({ children }) => {
         }
     }
 
-    const checkIfWalletIsConnected = async () => {
-        try {
-            if (!ethereum) {
-                return alert('Please install Metamask')
-            }
-            const accounts = await ethereum.request({ method:'eth_requestAccounts' })
-            if (accounts.length) {
-                setCurrentAccount(accounts[0])
-
-                getAllTransactions()
-            } else {
-                console.log('No accounts found')
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
     const connectWallet = async () => {
         try {
             if (!ethereum) {
@@ -158,10 +140,25 @@ export const TransactionProvider = ({ children }) => {
     }
 
     useEffect(() => {
+        const checkIfWalletIsConnected = async () => {
+            try {
+                if (!ethereum) {
+                    return alert('Please install Metamask')
+                }
+                const accounts = await ethereum.request({ method:'eth_requestAccounts' })
+                if (accounts.length) {
+                    setCurrentAccount(accounts[0])
+    
+                    getAllTransactions()
+                } else {
+                    console.log('No accounts found')
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
         checkIfWalletIsConnected()
         checkIfTransactionsExists()
-
-        // eslint-disable-line react-hooks/exhaustive-deps
     },[transactionCount])
 
     return (
