@@ -30,7 +30,8 @@ export const TransactionProvider = ({ children }) => {
 
     useEffect(() => {
         checkIfWalletIsConnected()
-    },[])
+        checkIfTransactionsExists()
+    },[transactionCount])
 
     const checkIfWalletIsConnected = async () => {
         try {
