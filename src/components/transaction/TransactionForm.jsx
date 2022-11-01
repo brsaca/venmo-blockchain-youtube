@@ -12,6 +12,7 @@ function TransactionForm() {
     amount,
     message,
     setMessage,
+    isLoading,
   } = useContext(TransactionContext);
 
   const handleSubmit = (e) => {
@@ -42,6 +43,7 @@ function TransactionForm() {
                 type="text"
                 name="addressTo"
                 value={addressTo}
+                disabled = {isLoading ? 'disabled' : ''}
                 onChange={(e) => setAddressTo(e.target.value)}
               />
             </div>
@@ -52,6 +54,7 @@ function TransactionForm() {
                 type="text"
                 name="message"
                 value={message}
+                disabled = {isLoading ? 'disabled' : ''}
                 onChange={(e) => setMessage(e.target.value)}
               />
             </div>
@@ -70,13 +73,14 @@ function TransactionForm() {
                     name="amount"
                     value={amount}
                     step="0.001"
+                    disabled = {isLoading ? 'disabled' : ''}
                     onChange={(e) => setAmount(e.target.value)}
                   />
                 </div>
               </div>
 
-              <button className={styles.sendButton} type="submit">
-                Send
+              <button className={isLoading?styles.sendButtonLoading :styles.sendButton} type="submit">
+              {isLoading? 'Sending...' : 'Send'}
               </button>
             </div>
           </div>

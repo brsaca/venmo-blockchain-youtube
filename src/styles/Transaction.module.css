@@ -102,6 +102,17 @@
   border-radius: 0.25rem;
 }
 
+.sendButtonLoading {
+  background-color: white;
+  color: #bcc1c6;
+  border: 2px solid #bcc1c6;
+  font-weight: bold;
+  padding: 0.725rem 3rem;
+  border-radius: 0.25rem;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 /* Swap */
 .swapContainer {
   display: flex;
