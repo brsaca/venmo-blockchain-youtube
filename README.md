@@ -32,6 +32,9 @@ Based on youtube tutorial [Build Venmo Web3 Clone with Next.js & Solidity](https
 <a href="https://www.netlify.com/">
 <img src="images/netlify.png" align="center" width="10%">
 </a>  
+<a href="https://infura.io/">
+<img src="images/infura.png" align="center" width="7%">
+</a>  
 </p>
 
 ## 🤖 Requirements
