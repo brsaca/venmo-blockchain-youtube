@@ -37,11 +37,11 @@
 }
 
 .navigationItem[data-current] .navigationIcon {
-  color: var(--primary-color);
+  color: #008cff;;
 }
 
 .navigationItem[data-current] {
-  border-bottom: 3px solid var(--primary-color);
+  border-bottom: 3px solid #008cff;;
 }
 
 /* Feed */

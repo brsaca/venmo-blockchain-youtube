@@ -36,7 +36,7 @@
 .arrowDownIcon {
   width: 1rem;
   height: 1rem;
-  color: var(--primary-color);
+  color: #008cff;;
   stroke-width: 3px;
 }
 
@@ -54,7 +54,7 @@
 }
 
 .connectBtn {
-  background-color: var(--primary-color);
+  background-color: #008cff;;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 9999px;
@@ -63,6 +63,6 @@
 }
 
 .accentColor {
-  color: var(--primary-color);
+  color: #008cff;;
   font-weight: bolder;
 }

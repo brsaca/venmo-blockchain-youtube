@@ -44,6 +44,8 @@
   padding: 0.75rem;
   outline: none;
   text-align: right;
+  border:0;
+  outline:0;
 }
 
 /* Divider */
@@ -87,12 +89,14 @@
   outline: none;
   text-align: right;
   flex: 1;
+  border:0;
+  outline:0;
 }
 
 .sendButton {
   background-color: white;
-  color: var(--primary-color);
-  border: 2px solid var(--primary-color);
+  color: #008cff;;
+  border: 2px solid #008cff;;
   font-weight: bold;
   padding: 0.725rem 3rem;
   border-radius: 0.25rem;
@@ -106,14 +110,14 @@
 }
 
 .swapTitle {
-  color: var(--primary-color);
+  color: #008cff;;
   text-transform: uppercase;
   font-size: 11px;
   font-weight: bold;
 }
 
 .swapIcon {
-  color: var(--primary-color);
+  color:#008cff;;
   width: 1rem;
   height: 1rem;
 }
