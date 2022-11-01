@@ -1,12 +1,33 @@
 import { ArrowsUpDownIcon, CurrencyDollarIcon } from '@heroicons/react/24/outline'
 import styles from '../../styles/Transaction.module.css'
+import { useContext } from 'react'
+import { TransactionContext } from '../../context/context'
 
 function TransactionForm() {
+  const {
+    sendTransaction,
+    setAddressTo,
+    addressTo,
+    setAmount,
+    amount,
+    message,
+    setMessage,
+  } = useContext(TransactionContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!addressTo || !amount || !message) {
+      console.log("Please fill all the fields");
+      return;
+    }
+    sendTransaction();
+  };
+
   return (
     <div className={styles.container}>
       <h3 className={styles.formTitle}>Send Payment / Request</h3>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className={styles.formContainer}>
           <div className={styles.swapContainer}>
             <ArrowsUpDownIcon className={styles.swapIcon} />
@@ -20,8 +41,8 @@ function TransactionForm() {
                 className={styles.formInput}
                 type="text"
                 name="addressTo"
-                value=''
-                //onChange={(e) => setAddressTo(e.target.value)}
+                value={addressTo}
+                onChange={(e) => setAddressTo(e.target.value)}
               />
             </div>
             <div className={styles.formInputContainer}>
@@ -30,8 +51,8 @@ function TransactionForm() {
                 className={styles.formInput}
                 type="text"
                 name="message"
-                value=''
-               // onChange={(e) => setMessage(e.target.value)}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
               />
             </div>
           </div>
@@ -47,9 +68,9 @@ function TransactionForm() {
                     className={styles.amountInput}
                     type="number"
                     name="amount"
-                    value=''
+                    value={amount}
                     step="0.001"
-                   // onChange={(e) => setAmount(e.target.value)}
+                    onChange={(e) => setAmount(e.target.value)}
                   />
                 </div>
               </div>
