@@ -6,7 +6,7 @@ import { TransactionContext } from "../../context/context";
 import { shortenAddress } from "../../utils/shortenAddress";
 
 function ActivityCard() {
-  const { transactions, currentAccount } = useContext(TransactionContext);
+  const { transactions } = useContext(TransactionContext);
   const generateRandomAvatar = () => {
     const randomAvatar = Math.floor(Math.random() * 1000);
     return `https://i.pravatar.cc/${randomAvatar}`;
