@@ -1,8 +1,16 @@
 import { ChatBubbleBottomCenterIcon, GlobeAltIcon, HeartIcon } from "@heroicons/react/24/outline";
 import { UserGroupIcon, UserIcon } from "@heroicons/react/24/solid";
 import styles from "../../styles/Activity.module.css";
+import { useContext } from "react";
+import { TransactionContext } from "../../context/context";
+import { shortenAddress } from "../../utils/shortenAddress";
 
 function ActivityCard() {
+  const { transactions, currentAccount } = useContext(TransactionContext);
+  const generateRandomAvatar = () => {
+    const randomAvatar = Math.floor(Math.random() * 1000);
+    return `https://i.pravatar.cc/${randomAvatar}`;
+  };
 
   return (
     <div className={styles.container}>
@@ -22,25 +30,27 @@ function ActivityCard() {
       </div>
 
       <div className={styles.feedList}>
-            <div key='' className={styles.feedItem}>
+        {transactions.map(
+          ({ addressFrom, timestamp, message, addressTo }, index) => (
+            <div key={index} className={styles.feedItem}>
               <div className={styles.avatarContainer}>
                 <img
                   className={styles.avatarImage}
-                  src='https://i.pravatar.cc/40'
+                  src={generateRandomAvatar()}
                   alt=""
                 />
               </div>
 
               <div className={styles.feedDetails}>
                 <h3 className={styles.feedAuthor}>
-                ADDRESS1 to ADDRESS2
+                {shortenAddress(addressFrom)} to {shortenAddress(addressTo)}
                 </h3>
                 <span className={styles.feedCreatedAt}>
-                  Date
+                  {timestamp}
                   <GlobeAltIcon className={styles.globeIcon} />
                 </span>
 
-                <p className={styles.feedBody}>Message</p>
+                <p className={styles.feedBody}>{message}</p>
               </div>
 
               <div className={styles.feedCta}>
@@ -48,6 +58,8 @@ function ActivityCard() {
                 <ChatBubbleBottomCenterIcon className={styles.commentIcon} />
               </div>
             </div>
+           )
+        )} 
       </div>
     </div>
   );

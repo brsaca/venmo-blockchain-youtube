@@ -1,6 +1,10 @@
 import { useEffect, useState, createContext } from "react";
 import { ethers } from 'ethers'
 import { contractABI, contractAddress } from '../utils/constants'
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
+TimeAgo.addLocale(en)
+const timeAgo = new TimeAgo('en-US')
 
 export const TransactionContext = createContext()
 
@@ -27,11 +31,40 @@ export const TransactionProvider = ({ children }) => {
     const [transactionCount, setTransactionCount] = useState(
       localStorage.getItem('transactionCount'),
     )
+    const [transactions, setTransactions] = useState([])
 
-    useEffect(() => {
-        checkIfWalletIsConnected()
-        checkIfTransactionsExists()
-    },[transactionCount])
+    const getAllTransactions = async () => {
+        try {
+            if (ethereum) {
+                const transactionsContract = createEthereumContract()
+
+                const availableTransactions =
+                await transactionsContract.getAllTransactions()
+
+                const structuredTransactions = availableTransactions.map(
+                    transaction => ({
+                        addressTo: transaction.receiver,
+                        addressFrom: transaction.sender,
+                        timestamp: timeAgo.format(
+                        new Date(transaction.timestamp.toNumber() * 1000),
+                        'mini',
+                        ),
+                        message: transaction.message,
+
+                        amount: parseInt(transaction.amount._hex) / 10 ** 18,
+                    }),
+                )
+
+                console.log(structuredTransactions)
+
+                setTransactions(structuredTransactions)
+            } else {
+                console.log('Ethereum is not present')
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const checkIfWalletIsConnected = async () => {
         try {
@@ -41,6 +74,8 @@ export const TransactionProvider = ({ children }) => {
             const accounts = await ethereum.request({ method:'eth_requestAccounts' })
             if (accounts.length) {
                 setCurrentAccount(accounts[0])
+
+                getAllTransactions()
             } else {
                 console.log('No accounts found')
             }
@@ -122,9 +157,17 @@ export const TransactionProvider = ({ children }) => {
         }
     }
 
+    useEffect(() => {
+        checkIfWalletIsConnected()
+        checkIfTransactionsExists()
+    },[transactionCount])
+
     return (
         <TransactionContext.Provider value={{ 
+            transactionCount,
             connectWallet, 
+            transactions,
+            isLoading,
             currentAccount, 
             sendTransaction,
             setAddressTo,
